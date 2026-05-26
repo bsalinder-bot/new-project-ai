@@ -1,0 +1,22 @@
+name: Review Notification
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add PR review guidance comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Thanks for opening this PR! :wave:
+
+            - Make sure the PR summary and checklist are complete.
+            - Add reviewers using GitHub's "Reviewers" panel.
+            - Review the `REVIEW_REQUEST.md` file for suggested messaging.
+            - Ensure tests pass and the deployment workflow is ready.

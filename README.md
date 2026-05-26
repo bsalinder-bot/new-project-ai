@@ -124,6 +124,13 @@ The `k8s/ingress.yaml` manifest is optional and requires an ingress controller.
 
 Or trigger the GitHub Actions `deploy-k8s.yml` workflow and provide a base64-encoded `KUBE_CONFIG` repository secret.
 
+## Collaboration
+
+- Use the issue templates in `.github/ISSUE_TEMPLATE/` for bug reports and feature requests.
+- Use `.github/pull_request_template.md` for structured PRs.
+- `REVIEW_REQUEST.md` contains suggested wording for asking developers to review the project.
+- `CODEOWNERS` is configured to request reviews from `@bsalinder-bot` by default.
+
 ## Files
 
 - `app.py` — Flask API and request validation

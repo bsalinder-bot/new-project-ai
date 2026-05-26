@@ -26,3 +26,9 @@
 - Keep commits atomic and descriptive.
 - Rebase or merge consistently with `main`.
 - Run tests locally before pushing changes.
+
+## Review Process
+- Use the PR template in `.github/pull_request_template.md`.
+- Add reviewers in GitHub using the Reviewers panel.
+- If you need a review from external developers, use `REVIEW_REQUEST.md` as a message template.
+- Use issue templates in `.github/ISSUE_TEMPLATE/` for bug reports and feature requests.
