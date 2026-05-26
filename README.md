@@ -85,6 +85,12 @@ Run the container:
 make docker-run
 ```
 
+Run locally with Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
 ## Monitoring
 
 Once the service is running, scrape metrics at:
@@ -92,6 +98,14 @@ Once the service is running, scrape metrics at:
 ```text
 http://127.0.0.1:5000/metrics
 ```
+
+Health check endpoint:
+
+```text
+http://127.0.0.1:5000/healthz
+```
+
+Use the health endpoint in Kubernetes readiness/liveness probes.
 
 The instrumentation exposes request counts and request latency histograms for `/predict`.
 
@@ -102,7 +116,11 @@ Apply the provided manifests to your cluster (ensure `kubectl` is configured):
 ```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/hpa.yaml
+kubectl apply -f k8s/ingress.yaml
 ```
+
+The `k8s/ingress.yaml` manifest is optional and requires an ingress controller.
 
 Or trigger the GitHub Actions `deploy-k8s.yml` workflow and provide a base64-encoded `KUBE_CONFIG` repository secret.
 
@@ -111,12 +129,13 @@ Or trigger the GitHub Actions `deploy-k8s.yml` workflow and provide a base64-enc
 - `app.py` — Flask API and request validation
 - `model.py` — SPI signal preprocessing and inference pipeline
 - `Dockerfile` — production-style container image
+- `docker-compose.yml` — local compose deployment for development
 - `Makefile` — automation for installation, testing and containerization
 - `tests/` — unit tests for SPI inference and the API
 - `.github/workflows/ci.yml` — automated CI pipeline
 - `.github/workflows/tag-publish.yml` — tag-triggered Docker publish
-- `.github/workflows/deploy-k8s.yml` — optional k8s deploy workflow (requires `KUBECONFIG` secret)
-- `k8s/` — Kubernetes manifests
+- `.github/workflows/deploy-k8s.yml` — optional k8s deploy workflow (requires `KUBE_CONFIG` secret)
+- `k8s/` — Kubernetes manifests including deployment, service, HPA, and ingress
 
 ## LNN (torchdiffeq) Usage
 

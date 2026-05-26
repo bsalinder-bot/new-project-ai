@@ -19,6 +19,10 @@ def metrics():
     data = generate_latest()
     return Response(data, mimetype=CONTENT_TYPE_LATEST)
 
+@app.route('/healthz')
+def healthz():
+    return jsonify({'status': 'ok'}), 200
+
 @app.errorhandler(BadRequest)
 def handle_bad_request(error):
     return jsonify({

@@ -16,6 +16,16 @@ docker-build:
 docker-run:
 	docker run --rm -p 5000:5000 ghcr.io/bsalinder-bot/new-project-ai:latest
 
+compose-up:
+	docker-compose up --build
+
+compose-down:
+	docker-compose down
+
+k8s-apply:
+	kubectl apply -f k8s/deployment.yaml
+	kubectl apply -f k8s/service.yaml
+
 docker-push:
 	@echo "Requires DOCKER_REGISTRY and DOCKER_IMAGE environment variables."
 	@echo "Example: DOCKER_REGISTRY=ghcr.io/owner DOCKER_IMAGE=new-project-ai make docker-push"
