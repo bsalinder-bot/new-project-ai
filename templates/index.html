@@ -3,21 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple AI Demo</title>
+    <title>SYMBIOTIC PLANETARY INTELLIGENCE</title>
     <link rel="stylesheet" href="/static/style.css">
   </head>
   <body>
     <main>
-      <h1>Simple AI Intent Demo</h1>
-      <p>Enter a sentence and the app will predict the user intent.</p>
-      <textarea id="inputText" placeholder="Type something like 'I need help'..."></textarea>
-      <button id="submitButton">Predict Intent</button>
+      <h1>SYMBIOTIC PLANETARY INTELLIGENCE (SPI)</h1>
+      <p>Submit JSON to the `/predict` endpoint. Use the text fallback for demonstration or send biosignal channels for SPI inference.</p>
+      <textarea id="inputText" placeholder='Enter JSON: {"text":"I need help"}'></textarea>
+      <button id="submitButton">Send to SPI</button>
       <section id="output" class="hidden">
-        <h2>Prediction</h2>
-        <div><strong>Intent:</strong> <span id="intent"></span></div>
-        <div><strong>Confidence:</strong> <span id="confidence"></span></div>
-        <div><strong>Tokens:</strong> <span id="tokens"></span></div>
-        <div><strong>Message:</strong> <span id="message"></span></div>
+        <h2>Response</h2>
+        <pre id="response"></pre>
       </section>
     </main>
 
@@ -26,9 +23,17 @@
       const output = document.getElementById('output');
 
       button.addEventListener('click', async () => {
-        const text = document.getElementById('inputText').value.trim();
-        if (!text) {
-          alert('Please enter a sentence first.');
+        const raw = document.getElementById('inputText').value.trim();
+        if (!raw) {
+          alert('Please enter JSON before submitting.');
+          return;
+        }
+
+        let payload;
+        try {
+          payload = JSON.parse(raw);
+        } catch (err) {
+          alert('Invalid JSON. Enter a valid JSON payload.');
           return;
         }
 
@@ -37,14 +42,11 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ text })
+          body: JSON.stringify(payload)
         });
 
         const data = await response.json();
-        document.getElementById('intent').textContent = data.intent;
-        document.getElementById('confidence').textContent = data.confidence;
-        document.getElementById('tokens').textContent = data.tokens.join(', ');
-        document.getElementById('message').textContent = data.message;
+        document.getElementById('response').textContent = JSON.stringify(data, null, 2);
         output.classList.remove('hidden');
       });
     </script>
