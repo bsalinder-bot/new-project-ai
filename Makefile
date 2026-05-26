@@ -24,3 +24,11 @@ docker-push:
 
 cli:
 	python cli.py
+
+k8s-apply:
+	kubectl apply -f k8s/deployment.yaml
+	kubectl apply -f k8s/service.yaml
+
+k8s-apply:
+	kubectl apply -f k8s/deployment.yaml
+	kubectl apply -f k8s/service.yaml

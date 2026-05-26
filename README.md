@@ -93,6 +93,9 @@ make docker-run
 - `Makefile` — automation for installation, testing and containerization
 - `tests/` — unit tests for SPI inference and the API
 - `.github/workflows/ci.yml` — automated CI pipeline
+- `.github/workflows/tag-publish.yml` — tag-triggered Docker publish
+- `.github/workflows/deploy-k8s.yml` — optional k8s deploy workflow (requires `KUBECONFIG` secret)
+- `k8s/` — Kubernetes manifests
 
 ## LNN (torchdiffeq) Usage
 
