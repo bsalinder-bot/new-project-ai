@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: spi
-          image: ghcr.io/OWNER/new-project-ai:latest
+          image: ghcr.io/bsalinder-bot/new-project-ai:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           readinessProbe:

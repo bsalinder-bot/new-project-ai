@@ -11,10 +11,10 @@ test:
 	python -m unittest discover -s tests
 
 docker-build:
-	docker build -t planetary-translator:latest .
+	docker build -t ghcr.io/bsalinder-bot/new-project-ai:latest .
 
 docker-run:
-	docker run --rm -p 5000:5000 planetary-translator:latest
+	docker run --rm -p 5000:5000 ghcr.io/bsalinder-bot/new-project-ai:latest
 
 docker-push:
 	@echo "Requires DOCKER_REGISTRY and DOCKER_IMAGE environment variables."
@@ -24,10 +24,6 @@ docker-push:
 
 cli:
 	python cli.py
-
-k8s-apply:
-	kubectl apply -f k8s/deployment.yaml
-	kubectl apply -f k8s/service.yaml
 
 k8s-apply:
 	kubectl apply -f k8s/deployment.yaml

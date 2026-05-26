@@ -12,11 +12,11 @@ jobs:
         uses: azure/setup-kubectl@v3
         with:
           version: '1.30.0'
-      - name: Decode KUBECONFIG
+      - name: Decode KUBE_CONFIG
         env:
-          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         run: |
-          echo "$KUBECONFIG_DATA" | base64 --decode > $HOME/.kube/config
+          echo "$KUBE_CONFIG_DATA" | base64 --decode > $HOME/.kube/config
       - name: Apply k8s manifests
         run: |
           kubectl apply -f k8s/deployment.yaml

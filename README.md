@@ -85,6 +85,27 @@ Run the container:
 make docker-run
 ```
 
+## Monitoring
+
+Once the service is running, scrape metrics at:
+
+```text
+http://127.0.0.1:5000/metrics
+```
+
+The instrumentation exposes request counts and request latency histograms for `/predict`.
+
+## Kubernetes
+
+Apply the provided manifests to your cluster (ensure `kubectl` is configured):
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+Or trigger the GitHub Actions `deploy-k8s.yml` workflow and provide a base64-encoded `KUBE_CONFIG` repository secret.
+
 ## Files
 
 - `app.py` — Flask API and request validation
